@@ -18,9 +18,10 @@ def main():
 def anagram(letters):
   shuf_array_big=list(map("".join, itertools.permutations(letters)))
   dict_res=[] 
-  for i in range(0,len(shuf_array_big),8):  
+  nproc=mp.cpu_count()
+  for i in range(0,len(shuf_array_big),nproc):  
     jobs = []
-    shuf_array=shuf_array_big[i:i+8]
+    shuf_array=shuf_array_big[i:i+nproc]
     #print shuf_array
     for shuf in shuf_array:
       processes = mp.Process(target=findit, args=(shuf,))
